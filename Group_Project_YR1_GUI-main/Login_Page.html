@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">  	
+		<title>Login Page</title>
+        <style>
+             @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
+
+            /*This is styling the whole webpage behind all the main focus area. */
+        	body
+                {
+                    background-color: lightgray;
+                    font-family: 'Times New Roman', Times, serif;
+                }
+
+            /*This is styling the text at the top of the page, the heading. */
+            h1
+                {
+                    font-family: 'Ms Madi', cursive; 
+                }
+            
+            /*This adds a suttle effect when you hover over the buttons. */
+            button:hover 
+                {   
+                    opacity: 0.7;   
+                }   
+
+            /*This adds some design to the two buttons that are beneath the input fields. */
+            button 
+                {   
+                    background-color: #4CAF50;
+                    width: 50%;
+                    color: orange;
+                    padding: 15px;
+                    margin: 10px 0px;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5cm;
+                }   
+               
+            /*This adds a border around the main part of the page (form) */
+            form
+                {   
+                    border: 3px solid #f1f1f1;  
+                    border-radius: 1cm; 
+                }   
+
+            /*This styles the Username and Password input fields.*/
+            input[type=text], input[type=password] 
+                {   
+                    width: 50%;   
+                    margin: 8px 0;  
+                    padding: 12px 15px;   
+                    display: inline-block;   
+                    border: 4px solid #4CAF50;   
+                    box-sizing: border-box;   
+                    border-radius: 5cm;
+                    text-align: center;
+                }
+
+            /*This adds a background color to the main part of the page (form) */
+            .container
+                {
+                    padding:40px;
+                    background-color: darkgray;
+                    border-radius: 1cm;
+                }
+
+        </style>
+	</head>
+	<body>
+        <!--This is the heading at the top of the page.-->
+		<center> <h1>Account Login</h1> </center>
+            
+            <!-- (Lines 75-85) This is the login portion of the webpage, which includes username and password input boxes plus login and cancel buttons!. -->
+            <form>
+                <div class="container">   
+                    <center><label>Username : </label></center>
+                    <center><input type="text" placeholder="Enter Username" name="username" id="text1" required></center>
+                    <br>
+                    <center><label>Password : </label></center>
+                    <center><input type="password" placeholder="Enter Password" name="password" id="text2" required></center>
+                    <br>
+                    <br>
+                    <center><button type="button" onclick="javascript:validate()">Login</button></center>
+                    <br>
+                    <!-- (Lines 88-89) Here is the ability to have the browser remembers the users details that have been entered-->
+                    <center> <input type="checkbox" id="remeberMe" name="Remember Me" value="LsRememberMe" for="rememberMe"> <label for="rememberMe">Remember me</label></center>
+                    <label type="submit" value="Login" onclick="lsRememberMe()">
+                </div>
+            </form>
+
+            <script type="text/javascript">
+                /* (Lines 97-109) The purpose of this piece of code is to allow users into the webpage if their credentials are correct and if they aren't, 
+                redirect them to a fail page where they can essentially try again.*/
+                function validate()
+                    {
+                        if(document.getElementById("text1").value == "user" && document.getElementById("text2").value == "webpage")
+                            {
+                                /* If the user enters the correct login details then it will procedd to open the Main.html page.*/
+                                location.href="main.html";
+                            }
+                        else
+                            {
+                                /* If the user does not enter the corrent details or they are partially correct then they will be greated with the fail.html page where they have the option to go back and try again. */
+                                location.href="fail.html";
+                            }
+                    }
+
+                /* (Lines 112-135) This is part of the Remember Me Checkbox input. This allows the username to be saved and remembered if the checkbox was clicked. */
+                const rmCheck = document.getElementById("rememberMe"),
+                usernameInput = document.getElementById("username");
+
+                    if (localStorage.checkbox && localStorage.checkbox !== "") 
+                        {
+                            rmCheck.setAttribute("checked", "checked");
+                            usernameInput.value = localStorage.username;
+                        } else 
+                            {
+                                rmCheck.removeAttribute("checked");
+                                usernameInput.value = "";
+                            }
+
+                function lsRememberMe() 
+                    {
+                        if (rmCheck.checked && usernameInput.value !== "") 
+                            {
+                                localStorage.username = usernameInput.value;
+                                localStorage.checkbox = rmCheck.value;
+                            } else
+                                {
+                                    localStorage.username = "";
+                                    localStorage.checkbox = "";
+                                }
+                    }
+                    
+            </script>
+            
+	</body>
+</html>
